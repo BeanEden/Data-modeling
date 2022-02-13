@@ -111,23 +111,25 @@ class DataCreation:
     #         if input_number == 1:
     #             self.
 
-    def column_coice_menu(self):
+    def column_choice_menu(self):
         column_list = tuple(self.dataframe.columns)
         count = 0
         column_index = {}
         for i in column_list:
             count += 1
             column_index[count] = i
-            print(column_index[count])
+        self.view.print_column_selection(column_index)
         column_length = len(column_list)
         input_number = 0
         column_choice = []
-        while input_number != (int(column_length)+1):
+        exit_choice = int(column_length)+1
+        print(exit_choice)
+        while input_number != int(exit_choice):
             input_number = int(input())
             choice = column_index[input_number]
             column_choice.append(choice)
-            print(str(choice) + " selected\n")
-
+            print(str(column_choice) + " selected\n")
+        return column_choice
 
 
 

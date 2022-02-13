@@ -41,7 +41,19 @@ class View:
             "===================================\n"
             "Enter a choice and press enter :\n")
 
-    # def print_selection(self):
+    def print_column_selection(self, column_dictionnary):
+        print(
+            "===================================\n"
+            "COLUMN SELECT\n"
+            "===================================")
+            # " 1 - Info()\n"
+            # " 2 - Describe()\n"
+            # " 3 - Exit program\n"
+        for i in column_dictionnary.items():
+            print(i)
+        print(str(len(column_dictionnary)+1) + " - Exit selection\n"
+              "===================================\n"
+            "Enter a choice and press enter :\n")
     #
     # def print_type_select(self):
     #
