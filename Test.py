@@ -1,9 +1,9 @@
-# from Controller.ItemCreation import *
+from Controller.ItemCreation import DataCreation
 # from Controller.Menu import *
 #
 from Model.Model import *
 #
-# from View.View import *
+from View.View import View
 
 import pandas as pd
 import concurrent.futures
@@ -41,14 +41,14 @@ selected_header = []
 for i in column_list_quality:
     selected_header.append(headers[i])
 
-file_cwd_test = "C:\opc finis\Projet perso\data\Amsterdam\listings.csv"
-
-
-test_df = Database(file_cwd_test)
-index = test_df.select_header()
-
-test_try = test_df.fast_dataframe_creation(index)
-test_try = test_try.dropna(how="any")
+# file_cwd_test = "C:\opc finis\Projet perso\data\Amsterdam\listings.csv"
+#
+#
+# test_df = Database(file_cwd_test)
+# index = test_df.select_header()
+#
+# test_try = test_df.fast_dataframe_creation(index)
+# test_try = test_try.dropna(how="any")
 
 # shape []
 # format{}
@@ -69,4 +69,9 @@ df = Database(file_cwd_test)
 index = ["id", "room_type", "price", "minimum_nights", "neighbourhood"]
 
 dataframe = df.fast_dataframe_creation(index)
-dataframe.head(10)
+
+# print(dataframe)
+# dataframe.head(10)
+view = View()
+menu = DataCreation(dataframe, view)
+# menu.column_coice_menu()
