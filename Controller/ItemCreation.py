@@ -1,4 +1,7 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+import folium
 
 # class ItemCreation:
 #
@@ -123,17 +126,37 @@ class DataCreation:
         input_number = 0
         column_choice = []
         exit_choice = int(column_length)+1
-        print(exit_choice)
         while input_number != int(exit_choice):
             input_number = int(input())
-            choice = column_index[input_number]
-            column_choice.append(choice)
-            print(str(column_choice) + " selected\n")
+            try:
+                choice = column_index[input_number]
+                column_choice.append(choice)
+                print(str(column_choice) + " selected\n")
+            except KeyError:
+                input_number = int(exit_choice)
         return column_choice
 
 
 
+    def pie_chart_creator(self, intel, titles):
+        ax1 = plt.subplot()
+        ax1.pie(intel, explode=None, labels=titles, autopct='%1.1f%%',
+            shadow=True, startangle=90)
+        ax1.axis('equal')
+        return plt.show()
 
+    def scatter_map_creator(self, column_data_name, filter_selected = 0, latitude_column_name="latitude", longitude_column_name="longitude"):
+        latitude_center = self.dataframe[latitude_column_name].mean()
+        longitude_center = self.dataframe[longitude_column_name].mean()
+        map_test = folium.Map(location=[latitude_center, longitude_center], zoom_strat=12)
+
+        listing = self.dataframe[self.dataframe[column_data_name] > int(filter_selected)][[latitude_column_name, longitude_column_name, column_data_name]]
+        listing.apply(lambda liste: folium.Marker(location=[liste[latitude_column_name], liste[longitude_column_name]]).add_to(map_test),
+                      axis=1)
+        map_name = input("Enter map name :")
+        full_name =  map_name + ".html"
+        map_test.save(full_name)
+        map_test
 
 
     # df.T
@@ -162,17 +185,18 @@ class DataCreation:
             dataframe.describe()
         # elif input_number == 4:
 
-
+    sizes = [15, 30, 45, 10]
 ### graphs
-#     def plot_scatter(ax, prng, nb_samples=100):
-#         """Scatter plot."""
-#         for mu, sigma, marker in [(-.5, 0.75, 'o'), (0.75, 1., 's')]:
-#             x, y = prng.normal(loc=mu, scale=sigma, size=(2, nb_samples))
-#             ax.plot(x, y, ls='none', marker=marker)
-#         ax.set_xlabel('X-label')
-#         ax.set_title('Axes title')
-#         return ax
+    def plot_scatter(self, ax, prng, nb_samples=100):
+        """Scatter plot."""
+        for mu, sigma, marker in [(-.5, 0.75, 'o'), (0.75, 1., 's')]:
+            x, y = prng.normal(loc=mu, scale=sigma, size=(2, nb_samples))
+            ax.plot(x, y, ls='none', marker=marker)
+        ax.set_xlabel('X-label')
+        ax.set_title('Axes title')
+        return ax
 #
+
 #     def plot_bar_graphs(ax, prng, min_value=5, max_value=25, nb_samples=5):
 #         """Plot two bar graphs side by side, with letters as x-tick labels."""
 #         x = np.arange(nb_samples)
@@ -219,14 +243,9 @@ class DataCreation:
 # plt.show()
 # ####
 #
-# # Pie chart, where the slices will be ordered and plotted counter-clockwise:
-# labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
-# sizes = [15, 30, 45, 10]
-# explode = (0, 0.1, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
-#
-# fig1, ax1 = plt.subplots()
-# ax1.pie(sizes, explode=explode, labels=labels, autopct='%1.1f%%',
-#         shadow=True, startangle=90)
-# ax1.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
-#
-# plt.show()
+# Pie chart, where the slices will be ordered and plotted counter-clockwise:
+labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+sizes = [15, 30, 45, 10]
+explode = (0, 0.1, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+

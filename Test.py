@@ -9,6 +9,7 @@ import pandas as pd
 import concurrent.futures
 import os
 import matplotlib.pyplot as plt
+import numpy as np
 
 # header = pd.read_csv(file_cwd_test, index_col=0, nrows=0)
 headers = {
@@ -66,12 +67,64 @@ for i in column_list_quality:
 file_cwd_test = "C:\opc finis\Projet perso\data\Amsterdam\listings.csv"
 df = Database(file_cwd_test)
 
-index = ["id", "room_type", "price", "minimum_nights", "neighbourhood"]
+# index = ["id", "room_type", "price", "minimum_nights", "neighbourhood"]
+index_map = ["id", "room_type", "price", "longitude", "latitude"]
 
-dataframe = df.fast_dataframe_creation(index)
+dataframe = df.fast_dataframe_creation(index_map)
 
 # print(dataframe)
 # dataframe.head(10)
 view = View()
 menu = DataCreation(dataframe, view)
-menu.column_choice_menu()
+# choice = menu.column_choice_menu()
+# test = menu.dataframe.groupby(choice).mean()
+labels = 'Frogs', 'Hogs', 'Dogs', 'Logs'
+sizes = [15, 30, 45, 10]
+menu.pie_chart_creator(sizes, labels)
+# size_two = menu.dataframe.groupby("room_type").mean()
+# print(size_two)
+# df = pd.DataFrame({'mass': [0.330, 4.87 , 5.97],
+#                    'radius': [2439.7, 6051.8, 6378.1]},
+#                   index=['Mercury', 'Venus', 'Earth'])
+#
+# labels_two = menu.dataframe["room_type"]
+# print(menu.dataframe)
+
+# dataframe_grouped = menu.dataframe.groupby(by="room_type")
+# print(dataframe_grouped)
+
+
+# duration_analysis=pd.DataFrame(dataframe["price"].value_counts()).sort_index()
+# duration_analysis.columns=["price"]
+# duration_analysis1=duration_analysis.groupby(pd.cut(duration_analysis.index, np.arange(0, 200, 10))).sum()
+# graph = duration_analysis1.plot.bar()
+# plt.show()
+# duration_analysis2=duration_analysis.groupby(pd.cut(duration_analysis.index, np.arange(60, 80, 1))).sum()
+# duration_analysis2.plot.bar()
+# plt.show()
+
+menu.scatter_map_creator("price", 500)
+
+# dataframe_test = dataframe_grouped["room_type"]
+
+
+# df = dataframe_test.plot.pie(y='room_type', figsize=(5, 5))
+
+# labels_two.groupby(by = ["room_type"])
+# print(labels_two)
+
+#
+# label_list = []
+# for i in labels_two:
+#         label_list.append(i)
+# print(label_list)
+
+
+# labels_two = menu.dataframe["room_type"]
+# print(labels_two)
+# labels_two = labels_two.groupby(by=["room_type"])
+
+
+# chart = menu.pie_chart_creator(menu.dataframe.groupby("room_type").mean(), menu.dataframe["room_type"])
+# test = pd.DataFrame(menu.dataframe[choice])
+
