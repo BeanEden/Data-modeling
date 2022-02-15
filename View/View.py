@@ -41,6 +41,59 @@ class View:
             "===================================\n"
             "Enter a choice and press enter :\n")
 
+
+    def print_dataframe_sorting_menu(self):
+        print(
+            "===================================\n"
+            "DATAFRAME SORTING MENU\n"
+            "===================================\n"
+            " 1 - Drop_Na()\n"
+            " 2 - Sort by value\n"
+            " 3 - Group by column\n"
+            " 4 - Sort by index\n"
+            " 5 - Remove a column\n"
+            " 6 - Transposing lines and columns\n"
+            " 7 - Exit to dataframe menu\n"
+            "===================================\n"
+            "Enter a choice and press enter :\n")
+
+    def print_dropna_menu(self):
+        print(
+            "===================================\n"
+            "DROP_NA MENU\n"
+            "===================================\n"
+            " 1 - Drop_all\n"
+            " 2 - Drop_any\n"
+            " 3 - Exit to sorting menu\n"
+            "===================================\n"
+            "Enter a choice and press enter :\n")
+
+    def print_sort_value_menu(self):
+        print(
+            "===================================\n"
+            "SORTING BY VALUE MENU\n"
+            "===================================\n"
+            " 1 - Drop_all\n"
+            " 2 - Drop_any\n"
+            " 3 - Exit to sorting menu\n"
+            "===================================\n"
+            "Enter a choice and press enter :\n")
+
+
+    def print_graph_menu(self):
+        print(
+            "===================================\n"
+            "GRAPH MENU\n"
+            "===================================\n"
+            " 1 - Pie chart\n"
+            " 2 - Bar diagram\n"
+            " 3 - Scatter diagram\n"
+            " 4 - Geographic map\n"
+            " 5 - Exit to main menu\n"
+            "===================================\n"
+            "Enter a choice and press enter :\n")
+
+
     def print_column_selection(self, column_dictionnary):
         print(
             "===================================\n"
@@ -51,7 +104,7 @@ class View:
             # " 3 - Exit program\n"
         for i in column_dictionnary.items():
             print(i)
-        print(str(len(column_dictionnary)+1) + " - Exit selection\n"
+        print("00 - Exit selection\n"
               "===================================\n"
             "Enter a choice and press enter :\n")
     #
