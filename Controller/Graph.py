@@ -21,14 +21,15 @@ class GraphCreatorClass:
         return step_try
 
     def bar_diagram_creator(self, dataframe_selected, argument):
+        graph_data = ""
         if argument == "count":
-            trout = dataframe_selected.sort_index()
+            graph_data = dataframe_selected
         else:
             trout = dataframe_selected[argument].value_counts().sort_index()
-        trout_max = trout.max()
-        step = self.percent_step_definition(10, trout_max, 0)
-        trout1 = trout.groupby(pd.cut(trout.index, np.arange(0, trout_max + step, step))).sum()
-        trout1.plot.bar()
+            trout_max = trout.max()
+            step = self.percent_step_definition(10, trout_max, 0)
+            graph_data = trout.groupby(pd.cut(trout.index, np.arange(0, trout_max + step, step))).sum()
+        graph_data.plot.bar()
         plt.show()
 
     def pie_chart_creator(self, dataframe_selected, column_y):
