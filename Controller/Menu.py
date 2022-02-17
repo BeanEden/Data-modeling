@@ -106,10 +106,9 @@ class DataCreation:
         self.dataframe_sorting_menu(next_dataframe)
 
     def sort_index_menu(self, dataframe_selected):
-        self.sorting.dataframe = dataframe_selected
         ascending_choice = self.boolean_choice_menu()
         axis_choice = self.axis_choice_menu()
-        dataframe_sorted = self.sorting.sort_index_function(ascending_choice=ascending_choice,
+        dataframe_sorted = self.sorting.sort_index_function(dataframe_selected, ascending_choice=ascending_choice,
                                                             axis_choice=axis_choice)
         print(dataframe_sorted)
         self.save_item_selection(dataframe_sorted)
@@ -117,17 +116,15 @@ class DataCreation:
         self.dataframe_sorting_menu(next_dataframe)
 
     def sort_column_suppression_menu(self, dataframe_selected):
-        self.sorting.dataframe = dataframe_selected
         column_choice = self.column_selection_menu(dataframe_selected)
-        dataframe_sorted = self.sorting.dataframe_column_suppression(column_choice)
+        dataframe_sorted = self.sorting.dataframe_column_suppression(dataframe_selected, column_choice)
         print(dataframe_sorted)
         self.save_item_selection(dataframe_sorted)
         next_dataframe = self.continue_with_dataframe(dataframe_sorted)
         self.dataframe_sorting_menu(next_dataframe)
 
     def sort_transposing_menu(self, dataframe_selected):
-        self.sorting.dataframe = dataframe_selected
-        dataframe_sorted = self.sorting.dataframe_transposing_function()
+        dataframe_sorted = self.sorting.dataframe_transposing_function(dataframe_selected)
         print(dataframe_sorted)
         self.save_item_selection(dataframe_sorted)
         next_dataframe = self.continue_with_dataframe(dataframe_sorted)
@@ -152,28 +149,24 @@ class DataCreation:
         self.sorting.dataframe = dataframe_selected
         column_choice = self.column_selection_menu(dataframe_selected)
         graph = self.graph.pie_chart_creator(dataframe_selected, column_choice[0])
-        self.graph.save_item_selection(graph)
         self.dataframe_graphs_menu(dataframe_selected)
 
     def bar_diagram_menu(self, dataframe_selected):
         self.sorting.dataframe = dataframe_selected
         column_choice = self.column_selection_menu(dataframe_selected)
         graph = self.graph.bar_diagram_creator(dataframe_selected, column_choice[0])
-        self.graph.save_item_selection(graph)
         self.dataframe_graphs_menu(dataframe_selected)
 
     def scatter_diagram_menu(self, dataframe_selected):
         self.sorting.dataframe = dataframe_selected
         column_choice = self.column_selection_menu(dataframe_selected)
         graph = self.graph.scatter_diagram_creator(color_argument=column_choice[0])
-        self.graph.save_item_selection(graph)
         self.dataframe_graphs_menu(dataframe_selected)
 
     def geographic_map_menu(self, dataframe_selected):
         self.sorting.dataframe = dataframe_selected
         column_choice = self.column_selection_menu(dataframe_selected)
         graph = self.graph.scatter_map_creator(column_data_name=column_choice[0])
-        self.graph.save_item_selection(graph, "map")
         self.dataframe_graphs_menu(dataframe_selected)
 
     def column_selection_menu(self, dataframe_selected):
@@ -239,6 +232,7 @@ class DataCreation:
             pass
         else:
             self.save_item_selection(dataframe_sorted)
+
 
 #     def dataframe_operations(self):
 #     # df.sum()
