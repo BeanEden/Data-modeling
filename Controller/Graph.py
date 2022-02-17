@@ -40,14 +40,21 @@ class GraphCreatorClass:
         if a == 1:
             self.save_graph(graph)
 
-    def pie_chart_creator(self, dataframe_selected, column_y):
-        # plot = self.dataframe.plot.pie(y=column_y, figsize=(5, 5))
-        plot = dataframe_selected.plot.pie(y=column_y, figsize=(5, 5))
+    def pie_chart_creator(self, dataframe_selected, argument):
+        # # plot = self.dataframe.plot.pie(y=column_y, figsize=(5, 5))
+        # plot = dataframe_selected.plot.pie(y=argument, figsize=(5, 5))
+        graph_data = ""
+        if argument == "count":
+            graph_data = dataframe_selected
+        else:
+            trout = dataframe_selected[argument].value_counts().sort_index()
+            graph_data = trout.groupby(trout.index).sum()
+        graph = graph_data.plot.pie(y=argument, figsize=(5, 5))
         plt.show()
         a = self.save_graph_selection_yn()
         if a == 1:
-            self.save_graph(plot)
-        return plot
+            self.save_graph(graph)
+        return graph
 
     def scatter_map_creator(self, column_data_name="", filter_selected=0, latitude_column_name="latitude",
                             longitude_column_name="longitude"):

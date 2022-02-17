@@ -40,7 +40,7 @@ menu = DataCreation(dataframe, view)
 # print(type(dataframe_sorted))
 # print((type(trout1)))
 
-deletion = menu.sorting.dataframe_column_suppression(dataframe,"room_type")
+deletion = menu.sorting.dataframe_column_suppression(dataframe, "room_type")
 display(deletion)
 # df_room_trout = dataframe.value_counts("room_type").sort_index()
 # display(df_room_trout)
